@@ -1,0 +1,44 @@
+import type { PageApiRecord, PageState } from '../types';
+
+interface StoryPageProps {
+  page: PageApiRecord | null;
+  state: PageState;
+}
+
+export function StoryPage({ page, state }: StoryPageProps) {
+  if (!page || state === 'loading') {
+    return (
+      <article className="story-page loading">
+        <div className="image placeholder">Finding the page...</div>
+        <p>Turning to the page...</p>
+      </article>
+    );
+  }
+
+  const paragraphs = page.text
+    .split(/\n\s*\n/g)
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  const imageBody =
+    page.image_status === 'done' && page.image_url ? (
+      <img src={page.image_url} alt={`Illustration for page ${page.page_number}`} />
+    ) : (
+      <div className="image placeholder">
+        {page.image_status === 'failed'
+          ? 'The illustration did not arrive, but the story keeps going.'
+          : 'The illustration is still being drawn.'}
+      </div>
+    );
+
+  return (
+    <article className={`story-page ${state}`}>
+      <div className="image">{imageBody}</div>
+      <div className="story-text">
+        {paragraphs.map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
+      </div>
+    </article>
+  );
+}
