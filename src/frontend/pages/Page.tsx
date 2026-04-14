@@ -35,12 +35,12 @@ export function StoryPage({ page, state }: StoryPageProps) {
 
   return (
     <article className={`story-page ${state}`}>
-      <div className="image">{imageBody}</div>
-      <div className="story-text">
+      <div className="story-text story-script">
         {paragraphs.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
         ))}
       </div>
+      <div className="image story-visual">{imageBody}</div>
     </article>
   );
 }

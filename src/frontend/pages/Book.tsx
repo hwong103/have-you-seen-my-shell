@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { LiveIndicator } from '../components/LiveIndicator';
 import { PageTurner } from '../components/PageTurner';
 import { WordPicker } from '../components/WordPicker';
 import { StoryPage } from './Page';
@@ -35,7 +34,6 @@ export function Book() {
   const [latestPage, setLatestPage] = useState<number>(1);
   const [state, setState] = useState<PageState>('loading');
   const [pendingNextPage, setPendingNextPage] = useState<number | null>(null);
-  const [isLiveConnected, setIsLiveConnected] = useState(false);
   const [flashMessage, setFlashMessage] = useState<string | null>(null);
   const [turnLoading, setTurnLoading] = useState(false);
 
@@ -137,14 +135,7 @@ export function Book() {
     const connect = () => {
       socket = new WebSocket(getSocketUrl());
 
-      socket.addEventListener('open', () => {
-        if (!cancelled) {
-          setIsLiveConnected(true);
-        }
-      });
-
       socket.addEventListener('close', () => {
-        setIsLiveConnected(false);
         if (!cancelled) {
           reconnectTimeout = window.setTimeout(connect, 1200);
         }
@@ -278,41 +269,42 @@ export function Book() {
     <main className="book-shell">
       <header className="book-header">
         <h1>Have You Seen My Shell?</h1>
-        <LiveIndicator connected={isLiveConnected} />
       </header>
 
       {flashMessage ? <p className="flash">{flashMessage}</p> : null}
 
       <StoryPage page={page} state={state} />
 
-      {page && state === 'awaiting_word' ? (
-        <WordPicker
-          disabled={turnLoading}
-          words={{
-            a: page.word_a,
-            b: page.word_b,
-            c: page.word_c,
+      <aside className="floating-turn-modal" aria-label="Page controls">
+        {page && state === 'awaiting_word' ? (
+          <WordPicker
+            disabled={turnLoading}
+            words={{
+              a: page.word_a,
+              b: page.word_b,
+              c: page.word_c,
+            }}
+            onPick={chooseWord}
+          />
+        ) : null}
+
+        {state === 'generating' ? (
+          <div className="generating-banner" role="status" aria-live="polite">
+            The story is thinking...
+          </div>
+        ) : null}
+
+        <PageTurner
+          pageNumber={currentPageNumber}
+          canGoNext={canGoNext}
+          onPrev={() => navigate(`/${Math.max(1, currentPageNumber - 1)}`)}
+          onNext={() => {
+            if (canGoNext) {
+              navigate(`/${currentPageNumber + 1}`);
+            }
           }}
-          onPick={chooseWord}
         />
-      ) : null}
-
-      {state === 'generating' ? (
-        <div className="generating-banner" role="status" aria-live="polite">
-          The story is thinking...
-        </div>
-      ) : null}
-
-      <PageTurner
-        pageNumber={currentPageNumber}
-        canGoNext={canGoNext}
-        onPrev={() => navigate(`/${Math.max(1, currentPageNumber - 1)}`)}
-        onNext={() => {
-          if (canGoNext) {
-            navigate(`/${currentPageNumber + 1}`);
-          }
-        }}
-      />
+      </aside>
     </main>
   );
 }
