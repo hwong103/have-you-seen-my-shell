@@ -5,11 +5,11 @@ compatibility_date = "2024-11-01"
 [[d1_databases]]
 binding = "DB"
 database_name = "have-you-seen-my-shell"
-database_id = "YOUR_DATABASE_ID"
+database_id = "f99c162f-f47a-463a-a0ec-2b921eb9728b"
 
 [[kv_namespaces]]
 binding = "PAGE_CACHE"
-id = "YOUR_KV_ID"
+id = "d6936fc4220449ee8800f14259355d7a"
 
 [[durable_objects.bindings]]
 name = "LIVE_ROOM"
