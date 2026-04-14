@@ -2,7 +2,7 @@ INSERT INTO pages (page_number, text, scene_description, word_a, word_b, word_c,
 VALUES (
   1,
   'Turtle woke up one morning and his shell was gone.\n\nHe looked to the left. He looked to the right.\n\nIt was not there.\n\n"I will go and find it," said Turtle.',
-  'Turtle stands alone in a wide empty meadow, looking very small and very round without his shell.',
+  'Turtle stands alone in a wide empty meadow with a small soft exposed back and no shell, looking very small and very round.',
   'Frog',
   'Mountain',
   'Beetle',

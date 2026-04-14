@@ -27,7 +27,9 @@ export function StoryPage({ page, state }: StoryPageProps) {
       <div className="image placeholder">
         {page.image_status === 'failed'
           ? 'The illustration did not arrive, but the story keeps going.'
-          : 'The illustration is still being drawn.'}
+          : page.image_status === 'generating'
+            ? 'The illustration is still being drawn.'
+            : 'The illustration has not been generated yet.'}
       </div>
     );
 

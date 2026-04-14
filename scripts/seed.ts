@@ -7,7 +7,7 @@ It was not there.
 "I will go and find it," said Turtle.`;
 
 export const PAGE_1_SCENE =
-  'Turtle stands alone in a wide empty meadow, looking very small and very round without his shell.';
+  'Turtle stands alone in a wide empty meadow with a small soft exposed back and no shell, looking very small and very round.';
 
 export const INITIAL_BIBLE = {
   protagonist: 'Turtle',

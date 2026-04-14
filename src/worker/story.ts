@@ -157,6 +157,7 @@ page_text: The full page text. Max 60 words.
 scene_description: One sentence describing what is visible in the illustration.
 Focus on character positions and expressions only. No colour directions.
 Example: "Turtle stands in shallow water looking up at an Otter who is wearing a round shell as a hat and looking away."
+If Turtle appears in the scene, explicitly state that Turtle has no shell.
 word_a/b/c: Three single words, each a concrete noun or creature name.
 These will be offered to the next reader to steer the story.
 Make them varied — one safe, one surprising, one wild.
