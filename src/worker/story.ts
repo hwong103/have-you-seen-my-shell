@@ -248,6 +248,18 @@ export async function generateImageForExistingPage(
   pageNumber: number,
   env: Env,
 ): Promise<{ success: boolean; reason?: string }> {
+  if (pageNumber === 1) {
+    await env.DB.prepare(
+      "UPDATE pages SET image_url = '/images/turtle-page-1.png', image_status = 'done' WHERE page_number = 1",
+    ).run();
+    await env.PAGE_CACHE.delete('page:1');
+    await broadcast(env.LIVE_ROOM, {
+      type: 'page_image_ready',
+      page_number: 1,
+    });
+    return { success: true };
+  }
+
   const page = await env.DB
     .prepare('SELECT scene_description FROM pages WHERE page_number = ?')
     .bind(pageNumber)

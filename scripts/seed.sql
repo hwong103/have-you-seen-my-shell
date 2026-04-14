@@ -1,4 +1,4 @@
-INSERT INTO pages (page_number, text, scene_description, word_a, word_b, word_c, image_status)
+INSERT INTO pages (page_number, text, scene_description, word_a, word_b, word_c, image_status, image_url)
 VALUES (
   1,
   'Turtle woke up one morning and his shell was gone.\n\nHe looked to the left. He looked to the right.\n\nIt was not there.\n\n"I will go and find it," said Turtle.',
@@ -6,7 +6,8 @@ VALUES (
   'Frog',
   'Mountain',
   'Beetle',
-  'pending'
+  'done',
+  '/images/turtle-page-1.png'
 )
 ON CONFLICT(page_number) DO UPDATE SET
   text = excluded.text,
@@ -15,7 +16,7 @@ ON CONFLICT(page_number) DO UPDATE SET
   word_b = excluded.word_b,
   word_c = excluded.word_c,
   image_status = excluded.image_status,
-  image_url = NULL,
+  image_url = excluded.image_url,
   chosen_word = NULL,
   chosen_at = NULL;
 

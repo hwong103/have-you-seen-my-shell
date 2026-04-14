@@ -8,6 +8,7 @@ It was not there.
 
 export const PAGE_1_SCENE =
   'Turtle stands alone in a wide empty meadow with a small soft exposed back and no shell, looking very small and very round.';
+export const PAGE_1_IMAGE_URL = '/images/turtle-page-1.png';
 
 export const INITIAL_BIBLE = {
   protagonist: 'Turtle',
