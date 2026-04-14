@@ -17,7 +17,7 @@ class_name = "LiveRoom"
 
 [[migrations]]
 tag = "v1"
-new_classes = ["LiveRoom"]
+new_sqlite_classes = ["LiveRoom"]
 
 [ai]
 binding = "AI"
