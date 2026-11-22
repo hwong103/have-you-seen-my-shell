@@ -5,7 +5,7 @@ compatibility_date = "2024-11-01"
 [[d1_databases]]
 binding = "DB"
 database_name = "have-you-seen-my-shell"
-database_id = "f99c162f-f47a-463a-a0ec-2b921eb9728b"
+database_id = "4a6d0733-2068-4d67-9d34-d2890836ab17"
 
 [[kv_namespaces]]
 binding = "PAGE_CACHE"
